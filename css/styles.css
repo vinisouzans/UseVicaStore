@@ -1,0 +1,294 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.top-bar {
+    position: relative;
+    width: 100%;
+    height: 200px; /* Altura da barra */
+    /*background-color: #333;  Cor de fundo da barra */
+    overflow: hidden;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta a imagem de fundo para cobrir todo o espaço disponível */
+    z-index: -1; /* Coloca a imagem de fundo atrás da imagem redonda */
+}
+
+.profile-image {
+    position: absolute;
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Move a imagem redonda para o centro */
+    width: 190px; /* Largura da imagem redonda */
+    height: 190px; /* Altura da imagem redonda */
+    border-radius: 50%; /* Torna a imagem redonda */
+    border: 3px solid white; /* Borda branca */
+}
+/* Estilos para a barra de navegação */
+
+.navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #EFBF04;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    color: #EFBF04;
+    height: 150px;
+    max-width: 100%;
+}
+
+.div-icone {
+    max-width: 33%
+}
+
+.div-icone a {
+    font-size: 35px;
+}
+
+.navbar a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Adicionado para alinhar a linha */
+    padding-left: 1em;
+    padding-right: 5em;
+}
+
+.navbar a:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background-color: #fff;
+}
+
+.navbar a:hover {
+    color: #ccc;
+}
+
+/* Estilos para os ícones */
+.navbar i {
+    font-size: 24px;
+}
+
+/* Estilos para o texto abaixo dos ícones */
+.navbar span {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Estilo texto Nome da Loja */
+.titulo-loja {
+    color: #FFCC04;
+    text-align: center;
+    font-size: 50px;
+}
+.tempo-entrega {
+    color: black;
+    text-align: center;     
+    margin-bottom: 1em;  
+    font-size: 30px;     
+}
+.titulo-categoria {
+    color: black;
+    text-align: center;
+    font-size: 45px;
+}
+
+.div-produto {
+    margin-left: 0; 
+    margin-right: 0; 
+    max-width: 100%; 
+    padding-right: 15px;
+}
+.componente-produto {
+    background-color: #FFCC04;
+    margin: 0.5em;
+    height: 31em;
+    border-radius: 5px;
+    padding: 1em;
+    width: 100%;
+    margin-right: 0;
+}
+.componente-produto img {
+    max-height: 30em;
+    border-radius: 5px;
+    border-top: 20px;
+}
+.div-img {
+    max-width: 21em;
+}
+
+.nome-produto {
+    color: white; 
+    font-size: 30px;
+}
+
+.desc-produto {
+    text-decoration: none; 
+    font-size: 25px; 
+    text-align: justify;
+}
+
+.larg100 {
+    max-width: 100%;
+}
+
+/* preço preto */
+.preco-preto {
+    color: white; 
+    font-size: 25px;
+}
+
+.div-preco {
+    background-color: black; 
+    max-width: 10em; 
+    border-radius: 5px;
+}
+.div-preco b {
+    color: white; 
+    font-size: 25px;
+}
+
+/* Estilizando os botões de rádio */
+input[type="radio"] {
+    -webkit-appearance: none; /* Remove a aparência padrão do navegador */
+    -moz-appearance: none;
+    appearance: none;
+    width: 35px; /* Define a largura */
+    height: 35px; /* Define a altura */
+    border-radius: 0; /* Remove o arredondamento */
+    border: 2px solid black; /* Adiciona uma borda */
+    margin-right: 5px; /* Espaçamento entre os botões */
+    margin-top: 10px; 
+}
+
+/* Estilizando os botões de rádio quando estão marcados */
+input[type="radio"]:checked {            
+    background-color: gray; /* Cor de fundo quando marcado */
+    border-color: black; /* Cor da borda quando marcado */
+}
+
+/* Estilo dos botões de tamanho */
+.tamanho {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    border: 1px solid #636161;
+    margin: 5px;
+    text-align: center;
+    line-height: 90px;
+    cursor: pointer;
+    font-size: 40px;
+}
+.selecionado {
+    background-color: #f0f0f0;
+    border: 2px solid rgb(11, 236, 98);
+}
+
+/* Modal grande */
+.modal-dialog {
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: 5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.scrollable-div {
+    width: 100vw; /* largura igual à largura da viewport */
+    height: 100vh; /* altura igual à altura da viewport */
+    overflow: auto; /* adiciona barras de rolagem quando necessário */
+}
+
+.sessao {
+    margin-bottom: 70px; 
+    margin-right: 0;
+}
+
+.div-modal {
+    margin-right: 5px; 
+    margin-left: 5px; 
+    max-height: 100%; 
+    max-width: 100%;
+}
+
+.btn-fecha-modal {
+    color: white; 
+    font-size: 60px;
+}
+
+.nome-prod-modal{
+    color: white; 
+    font-size: 50px;
+}
+
+.div-foto-modal{
+    margin: 0.5em; 
+    border-radius: 5px; 
+    max-height: 70%;
+    max-width: 75%; 
+    margin-left: 3em; 
+    margin-bottom: 1em;
+}
+
+.div-foto-modal img{
+    max-height: 100%; 
+    max-width: 100%;
+}
+
+.btn-prev-next{
+    background-color: rgba(122, 122, 120, 0.692); 
+    height: 50px; 
+    width: 50px; 
+    border-radius: 50%;
+}
+
+.div-preco-modal{
+    padding: 1em;;
+}
+
+.div-preco-modal b {
+    font-size: 40px; 
+    color: white;
+}
+
+.div-preco-modal p {
+    font-size: 35px;
+    color: white;
+}
+
+.marg-1em {
+    margin: 1em;
+}
+
+/* Estilo do balão flutuante */
+#successBalloon {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(20, 194, 247);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 40px;
+}
