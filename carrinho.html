@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+    <title>Carrinho - ViCa Store</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    
+    <div class="content">
+
+        <h2 class="titulo-categoria">Carrinho de Compras</h2>
+
+        <div class="content" style="margin-bottom: 70px;">   
+            
+            <div ID="lista-prod-carrinho">
+
+                <!-- 
+                <div class="container" ID="produto_1" style="margin-left: 0; margin-right: 0; max-width: 100%; padding-right: 15px;">                                
+                    <div class="row span_12 componente-produto">
+                        
+                        <div class="col span_1" style="max-width: 21em;">
+                            <img ID="foto-prod-sel" src="" alt="Imagem do Produto" class="img-fluid">
+                        </div> 
+                                                    
+                        <div class="col span_10" style="padding-right: 0px;">
+                            <div class="col span_12" style="padding-right: 0; padding-left: 0;">
+                                <b ID="nome-prod-sel" style="color: white; font-size: 30px;"></b>
+                            </div>
+                            <div class="col span_12" style="padding-right: 0; padding-left: 0; margin-top: 15px;">
+                                <b style="font-size: 27px; display: inline-block;">Quantidade: </b>
+                                <p ID="qtd-prod-sel" style="text-decoration: none; font-size: 27px; display: inline-block;"></p>                                                              
+                            </div>       
+                                 <div class="col span_12" style="padding-right: 0; padding-left: 0;">
+                                <b style="font-size: 27px; display: inline-block;">Tamanho: </b>
+                                <p ID="tamanho-prod-sel" style="text-decoration: none; font-size: 27px; display: inline-block;"></p>                                                              
+                            </div>
+                            <div class="col span_12" style="padding-right: 0; padding-left: 0;">
+                                <b style="font-size: 27px; display: inline-block;">Observação: </b>
+                                <p ID="obs-prod-sel" style="text-decoration: none; font-size: 25px; display: inline-block; text-align: justify;"></p>                                                              
+                            </div>                  
+                            <div class="col-md-auto ms-auto" style="background-color: black; max-width: 15em; border-radius: 5px;">
+                                <b class="fs-6" style="color: white; font-size: 25px;">Preço: </b>
+                                <p ID="preco-prod-sel" style="color: white; text-decoration: none; font-size: 27px; display: inline-block;"></p> 
+                            </div>                             
+                        </div>  
+                        
+                        <div class="col span_1" style="max-width: 8em;">
+                            <img ID="img_produto_1" src="img/excluir.png" alt="Excluir produto" class="img-fluid" data-value="12345" onclick="excluirItemCarrinho('valor')" style="margin-top: 160%; height: 60px; width: 60px;">
+                        </div>                        
+                    </div>                    
+                </div> 
+                -->
+                
+                
+            </div>
+              
+            <div style="background-color: #FFCC04; margin-left: 1.5em; margin-right: 0.5em; border-radius: 5px; padding-left: 2em;">
+                <b style="color: white; font-size: 30px;">Endereço</b>
+                <br>
+                <p style="text-decoration: none; font-size: 30px; margin-top: 20px; display: inline-block;">Selecione >></p>  
+                <img ID="imgModalEndereco" src="img/botao-home.png" alt="cadastrar endereço" class="img-fluid" style="height: 60px; width: 60px;">     
+                <div>
+                    <b ID="nome-rua" style="font-size: 27px;"></b>
+                    <b ID="numero" style="font-size: 27px;"></b>
+                    <b ID="cep" style="font-size: 27px;"></b>
+                </div>            
+            </div>
+
+            <div style="background-color: #FFCC04; margin-top: 0.5em; margin-left: 1.5em; margin-right: 0.5em; border-radius: 5px; padding-left: 2em;">
+                <b style="color: white; font-size: 30px;">Forma de pagamento</b>
+                <br>
+                <p style="text-decoration: none; font-size: 30px; margin-top: 20px; display: inline-block;">Selecione >></p>  
+                <img ID="imgModalPagamento" src="img/forma-de-pagamento.png" alt="Selecionar forma de pagamento" class="img-fluid" style="height: 60px; width: 60px;"> 
+                <div>
+                    <b ID="pagamento" style="font-size: 27px;"></b>
+                </div>
+            </div>
+            
+            
+            <div>
+                <div class="col span_12" style="padding-right: 0; padding-left: 0; margin-top: 15px; margin-left: 1.5em;">
+                    <p style="text-decoration: none; font-size: 27px; display: inline-block;">Valor Total:</p>  
+                    <b ID="valor-total" style="font-size: 27px; display: inline-block;"></b>  
+                    <br>
+                    <p style="text-decoration: none; font-size: 27px; display: inline-block;">Quantidade de peças:</p>  
+                    <b ID="qtd-total-pecas" style="font-size: 27px; display: inline-block;"></b>                                                                               
+                </div>  
+                
+            </div>
+
+            <div style="margin-top: 0.5em; margin-right: 0.5em; border-radius: 5px; padding-left: 2em; margin-bottom: 150px;">
+                <button id="btn-whats" type="button" class="btn" data-dismiss="modal" style="background-color: rgb(32, 172, 19); font-size: 60px; color: white; width: 100%; display: flex; justify-content: center; align-items: center; border-radius: 15px; padding-bottom: 20px;" disabled>                    
+                    <span style="flex-grow: 1; text-align: center;">                                               
+                        <a id="link-whatsapp" href="#" style="text-decoration: none; height: 50px; font-size: 40px; color: white; font-weight: bold; ">
+                            <img src="img/whatsapp.png" alt="Ícone de adicionar" style="height: 50px; font-size: 40px; justify-content: right; align-items: right; pointer-events: none;"> 
+                            Enviar Pedido
+                        </a>
+                    </span>
+                </button>                
+            </div>
+                        
+        </div>
+        
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom" style="background-color: #EFBF04; height: 150px;">
+        <div class="container" style="background-color: #EFBF04; height: 150px; max-width: 100%;">
+            <div class="row span_12 d-flex justify-content-center" style="margin-inline-start: 7em;">
+                <div class="col span_4" style="max-width: 33%;">
+                    <!-- Ícone 1 -->
+                    <a class="navbar-brand" href="index.html" style="font-size: 35px;">
+                        <img src="img/menu.png" alt="Produtos" height="60" class="d-inline-block align-top">
+                        Produtos
+                    </a>
+                </div>
+                <div class="col span_4" style="max-width: 33%;">
+                    <!-- Ícone 2  -->
+                    <a class="navbar-brand" href="#" style="font-size: 35px;">
+                        <img src="img/shopping-cart.png" alt="Carrinho" height="60" class="d-inline-block align-top">
+                        Carrinho
+                    </a>
+                </div>
+                <div class="col span_4" style="max-width: 33%;">
+                    <!-- Ícone 3 -->
+                    <a class="navbar-brand" href="#" style="font-size: 35px;">
+                        <img src="img/user.png" alt="Histórico" height="60" class="d-inline-block align-top">
+                        Histórico
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>        
+
+    <!-- Modal Produto-->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content bg-warning"> <!-- Adicione a classe bg-warning aqui -->
+                          
+                <!-- Modal Body -->
+                <div class="modal-body container span_12">
+                    <button ID="btnFecharModal" type="button" class="close" data-dismiss="modal" style="color: white;">&times;</button>
+                    <h4 style="color: white; margin-left: 0.5em;">Heineken</h4>
+                    <div class="row justify-content-center" style="margin: 0.5em; border-radius: 5px; max-height: 15em;">
+                        <img src="img/produtos/legging-aracaju.webp" alt="Imagem do Produto" class="img-fluid" style="width: 100%; height: 100%; max-height: 15em;">
+                    </div>
+                    <div style="margin: 1em;">
+                        <p>Cerveja heineken, 600ml, gelada, com álcool, embalagem de vidro.</p>
+                    </div>
+                
+                    <div style="margin: 1em;">
+                        <b style="color: white;">R$ 6,99</b>
+                    </div>
+                
+                    <div style="margin: 1em;">
+                        <b>Observação</b>
+                    </div>
+                
+                    <div class="row" style="margin: 1em;">
+                        <div class="col">
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>                
+                </div>
+                
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer d-flex justify-content-between">
+                    <div ID="divQuantidadeProduto">
+                        <a class="navbar-brand" href="#" style="margin-right: 0;">
+                            <img src="img/botao-de-menos.png" alt="Diminuir quantidade">                        
+                        </a>                    
+                        <b style="margin: 1em;">1</b>
+                        <a class="navbar-brand" href="#">
+                            <img src="img/botao-mais.png" alt="Aumentar quantidade">                        
+                        </a>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal" style="background-color: black;">
+                            <img src="img/carrinho-branco.png" alt="Ícone de adicionar" style="width: 16px; height: 16px; margin-right: 5px;">Adicionar
+                        </button>
+                    </div>               
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Endereço -->
+    <div class="modal" id="modalEndereco">
+        <div class="modal-dialog" style="max-width: 95%; max-height: 70%;">
+            <div class="modal-content bg-warning"> <!-- Adicione a classe bg-warning aqui -->
+                          
+                <!-- Modal Body -->
+                <div class="modal-body container span_12">
+                    <button ID="btnFecharModalEndereco" type="button" class="close" data-dismiss="modal" style="color: white; font-size: 80px;">&times;</button>
+                    <h4 style="color: white; margin-left: 0.5em; color: white; font-size: 50px;">Qual o local de entrega?</h4>
+                    
+                    <div style="margin: 1em;">
+                        <b style="font-size: 40px;">Qual seu nome?</b>
+                    </div>
+                    <div style="margin: 1em;">
+                        <input ID="inpt-nome" type="text" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
+                        <p ID="msg-nome" style="font-size: 30px; color: red; visibility: hidden;">Preencha seu Nome</p>
+                    </div> 
+
+                    <div style="margin: 1em;">
+                        <b style="font-size: 40px;">Qual seu sobrenome?</b>
+                    </div>
+                    <div style="margin: 1em;">
+                        <input ID="inpt-sobrenome" type="text" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
+                    </div>       
+
+                    <div style="margin: 1em;">
+                        <b style="font-size: 40px;">Qual seu Whatsapp?</b>
+                    </div>
+                    <div style="margin: 1em;">
+                        <input type="text" id="telefoneInput" placeholder="(99) 99999-9999" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
+                        <p ID="msg-whats" style="font-size: 30px; color: red; visibility: hidden;">Preencha seu Whatsapp</p>
+                    </div>                     
+                
+                    <div style="margin: 1em;">
+                        <b style="font-size: 40px;">Rua / Avenida</b>
+                    </div>
+                    <div style="margin: 1em;">
+                        <input ID="inpt-rua" type="text" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
+                        <p ID="msg-rua" style="font-size: 30px; color: red; visibility: hidden;">Preencha sua Rua</p>
+                    </div> 
+
+                    <div style="margin: 1em;">
+                        <b style="font-size: 40px;">Número</b>
+                    </div>
+                    <div style="margin: 1em;">
+                        <input ID="inpt-numero" type="number" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
+                        <p ID="msg-numero" style="font-size: 30px; color: red; visibility: hidden;">Preencha o número</p>
+                    </div> 
+
+                    <div style="margin: 1em;">
+                        <b style="font-size: 40px;">CEP</b>
+                    </div>
+                    <div style="margin: 1em;">
+                        <input id="numero-cep" type="text" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
+                    </div>                     
+              
+                </div>
+                                
+                <!-- Modal Footer -->
+                <div class="modal-footer d-flex justify-content-between">
+                    <div ></div>
+                    <div class="row justify-content-end"> <!-- Use justify-content-end para alinhar à direita -->
+                        <button ID="btnConfirmarModalEndereco" type="button" class="btn btn-dark" data-dismiss="modal" style="background-color: black; font-size: 50px;">
+                            Confirmar
+                        </button>
+                    </div>               
+                </div>                
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Forma de Pagamento -->
+    <div class="modal" id="modalFormaPagamento">
+        <div class="modal-dialog" style="max-width: 90%; max-height: 90%;">
+            <div class="modal-content bg-warning"> <!-- Adicione a classe bg-warning aqui -->
+                          
+                <!-- Modal Body -->
+                <div class="modal-body container span_12">
+                    <button ID="btnFecharModalPagamento" type="button" class="close" data-dismiss="modal" style="color: white; font-size: 80px;">&times;</button>
+                    <h4 style="color: white; color: white; font-size: 45px;">Qual a forma de pagamento?</h4>
+                
+                    <div style="margin: 1em;">
+                        <form>
+                            <br>
+                            <input type="radio" id="opcao1" name="opcao" value="Pix">
+                            <label for="pix"><b style="font-size: 40px;">Pix</b></label><br>
+                            <hr style="border-color: #ccc;">
+                
+                            <input type="radio" id="opcao2" name="opcao" value="Dinheiro">
+                            <label for="dinheiro"><b style="font-size: 40px;">Dinheiro</b></label><br>
+                            <hr style="border-color: #ccc;">
+                
+                            <input type="radio" id="opcao3" name="opcao" value="Débito">
+                            <label for="debito" style="margin-bottom: 0;"><b style="font-size: 40px;">Débito</b></label><br>
+                            <p style="font-size:30px; margin-top: 0px; margin-left: 2em;">Levamos a máquininha de cartão.</p>
+                            <hr style="border-color: #ccc;">
+                
+                            <input type="radio" id="opcao4" name="opcao" value="Crédito">
+                            <label for="credito" style="margin-bottom: 0;"><b style="font-size: 40px;">Crédito</b></label><br>
+                            <p style="font-size:30px; margin-top: 0px; margin-left: 2em;">Levamos a máquininha de cartão.</p>
+                        </form>
+                    </div>
+                </div>
+                
+                
+                                
+                <!-- Modal Footer -->
+                <div class="modal-footer d-flex justify-content-between">
+                    <div ></div>
+                    <div class="row justify-content-end"> <!-- Use justify-content-end para alinhar à direita -->
+                        <button ID="btnConfirmarFormaPagt" type="button" class="btn btn-dark" data-dismiss="modal" style="background-color: black; font-size: 50px;">
+                            Confirmar
+                        </button>
+                    </div>               
+                </div>                
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+    <!-- Biblioteca de ícones (Font Awesome) 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="js/script.js"></script>
+    
+</body>
+</html>
