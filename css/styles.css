@@ -1,6 +1,7 @@
 body, html {
     margin: 0;
     padding: 0;
+    background-color: #a5a6a1;
 }
 
 .top-bar {
@@ -38,11 +39,11 @@ body, html {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #EFBF04;
+    background-color: #df1e33;
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
-    color: #EFBF04;
+    color: #df1e33;
     height: 150px;
     max-width: 100%;
 }
@@ -93,9 +94,9 @@ body, html {
 
 /* Estilo texto Nome da Loja */
 .titulo-loja {
-    color: #FFCC04;
+    color: black ;
     text-align: center;
-    font-size: 50px;
+    font-size: 60px;    
 }
 .tempo-entrega {
     color: black;
@@ -116,7 +117,7 @@ body, html {
     padding-right: 15px;
 }
 .componente-produto {
-    background-color: #FFCC04;
+    background-color: #d9d9d9 ;
     margin: 0.5em;
     height: 31em;
     border-radius: 5px;
@@ -134,7 +135,7 @@ body, html {
 }
 
 .nome-produto {
-    color: white; 
+    color: #df1e33;
     font-size: 30px;
 }
 
@@ -142,6 +143,7 @@ body, html {
     text-decoration: none; 
     font-size: 25px; 
     text-align: justify;
+    color: black;
 }
 
 .larg100 {
@@ -155,7 +157,7 @@ body, html {
 }
 
 .div-preco {
-    background-color: black; 
+    background-color: #df1e33; 
     max-width: 10em; 
     border-radius: 5px;
 }
@@ -172,7 +174,7 @@ input[type="radio"] {
     width: 35px; /* Define a largura */
     height: 35px; /* Define a altura */
     border-radius: 0; /* Remove o arredondamento */
-    border: 2px solid black; /* Adiciona uma borda */
+    border: 2px solid #df1e33; /* Adiciona uma borda */
     margin-right: 5px; /* Espaçamento entre os botões */
     margin-top: 10px; 
 }
@@ -180,31 +182,31 @@ input[type="radio"] {
 /* Estilizando os botões de rádio quando estão marcados */
 input[type="radio"]:checked {            
     background-color: gray; /* Cor de fundo quando marcado */
-    border-color: black; /* Cor da borda quando marcado */
+    border-color: #df1e33 ; /* Cor da borda quando marcado */
 }
 
 /* Estilo dos botões de tamanho */
 .tamanho {
     display: inline-block;
-    width: 90px;
-    height: 90px;
+    width: 85px;
+    height: 85px;
     border: 1px solid #636161;
     margin: 5px;
     text-align: center;
-    line-height: 90px;
+    line-height: 85px;
     cursor: pointer;
     font-size: 40px;
 }
 .selecionado {
     background-color: #f0f0f0;
-    border: 2px solid rgb(11, 236, 98);
+    border: 2px solid #df1e33 ;
 }
 
 /* Modal grande */
 .modal-dialog {
     max-width: 100%;
     max-height: 100%;
-    margin-top: 5em;
+    margin-top: 1em;
     margin-left: 0.5em;
     margin-right: 0.5em;
 }
@@ -221,6 +223,7 @@ input[type="radio"]:checked {
 }
 
 .div-modal {
+    background-color: #d9d9d9 ;
     margin-right: 5px; 
     margin-left: 5px; 
     max-height: 100%; 
@@ -228,26 +231,26 @@ input[type="radio"]:checked {
 }
 
 .btn-fecha-modal {
-    color: white; 
+    color: #df1e33;
     font-size: 60px;
 }
 
 .nome-prod-modal{
-    color: white; 
+    color: #df1e33;
     font-size: 50px;
 }
 
 .div-foto-modal{
-    margin: 0.5em; 
+    margin: 0.5em;
     border-radius: 5px; 
-    max-height: 70%;
-    max-width: 75%; 
-    margin-left: 3em; 
+    max-height: 80%;
+    max-width: 80%; 
+    margin-left: 4em; 
     margin-bottom: 1em;
 }
 
 .div-foto-modal img{
-    max-height: 100%; 
+    max-height: 80%; 
     max-width: 100%;
 }
 
@@ -264,12 +267,12 @@ input[type="radio"]:checked {
 
 .div-preco-modal b {
     font-size: 40px; 
-    color: white;
+    color: #df1e33;
 }
 
 .div-preco-modal p {
     font-size: 35px;
-    color: white;
+    color: #df1e33;
 }
 
 .marg-1em {
@@ -283,7 +286,7 @@ input[type="radio"]:checked {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(20, 194, 247);
+    background-color: #df1e33;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -291,4 +294,23 @@ input[type="radio"]:checked {
     z-index: 1000;
     font-family: Arial, sans-serif;
     font-size: 40px;
+}
+
+/* Sinalizador de itens no carrinho */
+.cart-count {
+    position: absolute;    
+    top: 0;
+    right: 0;
+    background-color: rgb(5, 184, 59);
+    color: white;
+    border-radius: 50%;
+    padding: 7px;
+    padding-bottom: 50px;
+    margin-right: 120px;
+    height: 48px;
+    width: 48px;
+}
+
+.bg-warning {
+    background-color: #d9d9d9 !important;
 }
