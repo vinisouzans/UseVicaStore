@@ -6,7 +6,7 @@ $(function(){
         var srcImg2 = $(this).find("input").attr("value");
         abrirModal(idElementoClicado, srcImg1, srcImg2 )
     });
-
+    atualizarIconeCarrinho()
     function abrirModal(idProduto, img1, img2){
         var idProdutoOculto = document.getElementById("id-Produto");
         idProdutoOculto.value = idProduto
@@ -46,14 +46,11 @@ $(function(){
 
     $(document).ready(function(){
         $("#btnFecharModal").click(function(){
-            $("#myModal").hide()
+            $("#myModal").hide()            
         });
     });
 
-    
-
     // Selecionar o tamanho da roupa
-
     $(".tamanho").click(function(){       
         var tamanhoSelecionado = $(this).data('tamanho');
         selecionarTamanho(tamanhoSelecionado)
@@ -95,47 +92,49 @@ $(function(){
             localStorage.setItem('tamanhoProdutoEscolhido', tamanhoSelecionado);
             var mensagem = document.getElementById('msg-tamanho-selecionar');
             mensagem.style.visibility = 'hidden';
+
+            var idProdutoOculto = document.getElementById('id-Produto')
+            // Cria um objeto para o produto
+            var produto = {
+                id: idProdutoOculto.value,
+                nome: nomeProduto,
+                preco: precoProduto,
+                observacoes: textoDigitado,
+                quantidade: "1",
+                srcFoto: srcFoto,
+                tamanho: tamanhoSelecionado
+            };
+
+            var produtos = [];
+            // Recupera o array de produtos do localStorage
+            if (localStorage.getItem('produtos') !== null){
+                produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+            }             
+
+            // Adiciona o novo produto ao array
+            produtos.push(produto);
+
+            // Salva o array atualizado de volta no localStorage
+            localStorage.setItem('produtos', JSON.stringify(produtos));            
+            $("#myModal").hide()
+            showSuccessBalloon()   
+            
+            var qtdCar = "0"
+            if (localStorage.getItem('qtdTotalPecas') !== null){
+                qtdCar = localStorage.getItem('qtdTotalPecas')
+            }
+            
+            var qtdCarInt = parseInt(qtdCar)
+            qtdCarInt = qtdCarInt + 1
+            localStorage.setItem('qtdTotalPecas', qtdCarInt)
+            atualizarIconeCarrinho()
+            
         } else {
             var mensagem = document.getElementById('msg-tamanho-selecionar');
             mensagem.style.visibility = 'visible';
-        }
-
-        var idProdutoOculto = document.getElementById('id-Produto')
-
-                
-        // Cria um objeto para o produto
-        var produto = {
-            id: idProdutoOculto.value,
-            nome: nomeProduto,
-            preco: precoProduto,
-            observacoes: textoDigitado,
-            quantidade: "1",
-            srcFoto: srcFoto,
-            tamanho: tamanhoSelecionado
-        };
-
-        // Recupera o array de produtos do localStorage
-        var produtos = JSON.parse(localStorage.getItem('produtos')) || [];
-
-        // Adiciona o novo produto ao array
-        produtos.push(produto);
-
-        // Salva o array atualizado de volta no localStorage
-        localStorage.setItem('produtos', JSON.stringify(produtos));
-
-        $("#myModal").hide()
-
-        showSuccessBalloon()
+        }       
+        
     });
-
-    window.addEventListener('load', function() {
-        if (window.location.pathname === '/index.html') {                        
-
-            
-        }
-    });
-
-    
 
     function obterTamanhoSelecionado() {
         // Obtém todos os elementos com a classe "tamanho"
@@ -160,6 +159,24 @@ $(function(){
         setTimeout(function() {
             balloon.style.display = 'none';
         }, 2000); // 2000 ms = 2 segundos
+    }
+
+    function atualizarIconeCarrinho(){
+        var qtdCarrinho = 0
+        if (localStorage.getItem('qtdTotalPecas') !== null){
+            qtdCarrinho = localStorage.getItem('qtdTotalPecas');
+        }
+        
+        if (qtdCarrinho > 0){
+            var spanQtdcar = document.getElementById('cartCount');
+            spanQtdcar.removeAttribute('hidden')
+
+            var pQtdeCar = document.getElementById('qtdCarrinhoIcone')
+            pQtdeCar.innerText = qtdCarrinho
+        } else {
+            var spanQtdcar = document.getElementById('cartCount');
+            spanQtdcar.setAttribute('hidden', 'hidden')
+        }
     }
 
     //
@@ -292,56 +309,60 @@ $(function(){
    
     function percorrerArrayProdutosSel() {
         // Recupera o array de produtos do localStorage
-        var produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+        if (localStorage.getItem('produtos') !== null){        
+            var produtos = JSON.parse(localStorage.getItem('produtos')) || [];
 
-        var texto = ""
-        var qtdTotalPecas = 0
-        var valorTotal = 0.00
+            var texto = ""
+            var qtdTotalPecas = 0
+            var valorTotal = 0.00
 
-        // Percorre o array de produtos
-        for (var i = 0; i < produtos.length; i++) {
-            // Acessa o nome do produto e imprime no console observacoes
+            // Percorre o array de produtos
+            for (var i = 0; i < produtos.length; i++) {
+                var idProd = produtos[i].id
+                var nomeProd = produtos[i].nome
+                var qtdProd =  produtos[i].quantidade
+                var tamanhoProd = produtos[i].tamanho
+                var precoProd = produtos[i].preco
+                var obsProd = produtos[i].observacoes
+                var srcFoto = produtos[i].srcFoto
 
-            var idProd = produtos[i].id
-            var nomeProd = produtos[i].nome
-            var qtdProd =  produtos[i].quantidade
-            var tamanhoProd = produtos[i].tamanho
-            var precoProd = produtos[i].preco
-            var obsProd = produtos[i].observacoes
-            var srcFoto = produtos[i].srcFoto
+                plotarNaTela(idProd, nomeProd, qtdProd, tamanhoProd, obsProd, precoProd, srcFoto)
 
-            plotarNaTela(idProd, nomeProd, qtdProd, tamanhoProd, obsProd, precoProd, srcFoto)
+                texto = texto + "---------------\n"
+                texto = texto + "*Produto:* " + nomeProd + "\n"
+                texto = texto + "*Tamanho:* " + tamanhoProd + "\n"
+                texto = texto + "*Quantidade:* " + qtdProd + "\n"
+                texto = texto + "*Observação:* " + obsProd + "\n"
+                texto = texto + "*Preço:* R$" + precoProd + "\n"
 
-            texto = texto + "---------------\n"
-            texto = texto + "*Produto:* " + nomeProd + "\n"
-            texto = texto + "*Tamanho:* " + tamanhoProd + "\n"
-            texto = texto + "*Quantidade:* " + qtdProd + "\n"
-            texto = texto + "*Observação:* " + obsProd + "\n"
-            texto = texto + "*Preço:* R$" + precoProd + "\n"
+                qtdTotalPecas = qtdTotalPecas +  parseInt(qtdProd)
 
-            qtdTotalPecas = qtdTotalPecas +  parseInt(qtdProd)
+                precoProd =  precoProd.replace("R$", "")
+                precoProd =  precoProd.replace(",", ".")
+                var precoNumber = parseFloat(precoProd)
+                valorTotal = valorTotal + precoNumber            
+            }        
 
-            precoProd =  precoProd.replace("R$", "")
-            precoProd =  precoProd.replace(",", ".")
-            var precoNumber = parseFloat(precoProd)
-            valorTotal = valorTotal + precoNumber            
-        }        
+            localStorage.setItem('textoProdutosCarrinho', texto);
+            localStorage.setItem('qtdTotalPecas', qtdTotalPecas);
+            localStorage.setItem('valorTotal', valorTotal.toFixed(2));
 
-        localStorage.setItem('textoProdutosCarrinho', texto);
-        localStorage.setItem('qtdTotalPecas', qtdTotalPecas);
-        localStorage.setItem('valorTotal', valorTotal.toFixed(2));
-
-        adicionarValorTotalTela()
-        adicionarTotalPecasTela()
-        montarTextoEnviar()
-        verificarDadosCliente()
-        verificarDadosPagamento()
-        verificaHabilitarBtnWhats()
+            adicionarValorTotalTela()
+            adicionarTotalPecasTela()
+            montarTextoEnviar()
+            verificarDadosCliente()
+            verificarDadosPagamento()
+            verificaHabilitarBtnWhats()
+            atualizarIconeCarrinho()
+        }
     }
 
     function adicionarValorTotalTela(){
         var valorTotal = document.getElementById('valor-total');
-        var valor = localStorage.getItem('valorTotal').replace("R$", "")
+        var valor = "0"
+        if (localStorage.getItem('valorTotal') !== null){
+            valor = localStorage.getItem('valorTotal').replace("R$", "")
+        }
         var totalFloat = parseFloat(valor)
         totalFloat = totalFloat.toFixed(2)
         var valorTotalFormatado = totalFloat.replace(".", ",")
@@ -349,8 +370,10 @@ $(function(){
     }
 
     function adicionarTotalPecasTela(){
-        var qtdTotalPecas = document.getElementById('qtd-total-pecas');
-        qtdTotalPecas.innerText = localStorage.getItem('qtdTotalPecas');
+        var qtdTotalPecas = document.getElementById('qtd-total-pecas');        
+        if(localStorage.getItem('qtdTotalPecas') !== null){
+            qtdTotalPecas.innerText = localStorage.getItem('qtdTotalPecas')
+        }
     }
 
 
@@ -402,7 +425,7 @@ $(function(){
 
         var bNomeProduto = document.createElement("b");
         bNomeProduto.id = "nome-prod-sel"
-        bNomeProduto.style.color = "white"
+        bNomeProduto.style.color = "#df1e33"
         bNomeProduto.style.fontSize = "30px"
         bNomeProduto.innerText = nomeProd
 
@@ -479,7 +502,7 @@ $(function(){
 
         var div9 = document.createElement("div");
         div9.className = "col-md-auto ms-auto"
-        div9.style.backgroundColor = "black"
+        div9.style.backgroundColor = "#df1e33"
         div9.style.maxWidth = "15em"
         div9.style.borderRadius = "5px"
 
@@ -518,6 +541,7 @@ $(function(){
         imgExcluir.setAttribute("data-value", idProduto)
         imgExcluir.onclick = function() {
             excluirItemCarrinho(imgExcluir.getAttribute("data-value"));
+            atualizarIconeCarrinho()
         };
 
         div10.appendChild(imgExcluir)
@@ -615,31 +639,31 @@ $(function(){
         var cepInput = document.getElementById('numero-cep');
         var valorCep = cepInput.value;
         localStorage.setItem('cepCliente', valorCep);
-
-        console.log(localStorage.getItem('nomeCliente'))
-        console.log(localStorage.getItem('sobrenomeCliente'))
-        console.log(localStorage.getItem('whatsCliente'))
-        console.log(localStorage.getItem('ruaCliente'))
-        console.log(localStorage.getItem('numeroCliente'))
-        console.log(localStorage.getItem('cepCliente'))   
-
         plotarDadosEntrega()
     }
 
     function plotarDadosEntrega(){
         var rua = document.getElementById('nome-rua');
-        rua.innerText = localStorage.getItem('ruaCliente') + ", N° "
-
+        if (localStorage.getItem('ruaCliente') !== null){
+            rua.innerText = localStorage.getItem('ruaCliente') + ", N° "
+        }
+        
         var numero = document.getElementById('numero'); 
-        numero.innerText = localStorage.getItem('numeroCliente') + ", CEP "
+        if(localStorage.getItem('numeroCliente') !== null){
+            numero.innerText = localStorage.getItem('numeroCliente') + ", CEP "
+        }        
 
         var cep = document.getElementById('cep'); 
-        cep.innerText = localStorage.getItem('cepCliente')
+        if (localStorage.getItem('cepCliente') !== null){
+            cep.innerText = localStorage.getItem('cepCliente')
+        }        
     }
 
     function plotarDadosPagemento(){
         var formaPagamento = document.getElementById('pagamento');
-        formaPagamento.innerText = localStorage.getItem('formaPagamento')
+        if (localStorage.getItem('formaPagamento') !== null){
+            formaPagamento.innerText = localStorage.getItem('formaPagamento')
+        }        
     }
 
     
@@ -647,26 +671,36 @@ $(function(){
     function verificarDadosCliente(){
         var faltaDados = 0
 
-        if (localStorage.getItem('nomeCliente').length = 0){
-            faltaDados = faltaDados + 1 
+        if (localStorage.getItem('nomeCliente') !== null){
+            if (localStorage.getItem('nomeCliente').length = 0){
+                faltaDados = faltaDados + 1 
+            }
         }
-
-        if (localStorage.getItem('whatsCliente').length = 0){
-            faltaDados = faltaDados + 1 
+        
+        if (localStorage.getItem('whatsCliente') !== null){
+            if (localStorage.getItem('whatsCliente').length = 0){
+                faltaDados = faltaDados + 1 
+            }
         }
+        
+        if (localStorage.getItem('ruaCliente') !== null){
+            if (localStorage.getItem('ruaCliente').length = 0 ){
+                faltaDados = faltaDados + 1 
+            }
+        }  
 
-        if (localStorage.getItem('ruaCliente').length = 0){
-            faltaDados = faltaDados + 1 
+        if (localStorage.getItem('numeroCliente') !== null){
+            if (localStorage.getItem('numeroCliente').length = 0 ){
+                faltaDados = faltaDados + 1 
+            }
         }
-
-        if (localStorage.getItem('numeroCliente').length = 0){
-            faltaDados = faltaDados + 1 
+        
+        if (localStorage.getItem('cepCliente') !== null){
+            if (localStorage.getItem('cepCliente').length = 0 ){
+                faltaDados = faltaDados + 1 
+            }
         }
-
-        if (localStorage.getItem('cepCliente').length = 0){
-            faltaDados = faltaDados + 1 
-        }
-
+        
         if (faltaDados == 0){
             plotarDadosEntrega()
         }
@@ -675,10 +709,12 @@ $(function(){
 
     function verificarDadosPagamento(){
         var faltaDados = 0
-        if (localStorage.getItem('formaPagamento').length = 0){
-            faltaDados = faltaDados + 1 
+        if(localStorage.getItem('formaPagamento') !== null){
+            if (localStorage.getItem('formaPagamento').length = 0 ){
+                faltaDados = faltaDados + 1 
+            }
         }
-
+        
         if (faltaDados == 0){
             plotarDadosPagemento()
         }
@@ -689,31 +725,46 @@ $(function(){
 
         var faltaDados = 0
 
-        if (localStorage.getItem('nomeCliente').length == 0){
-            faltaDados = faltaDados + 1 
+        if (localStorage.getItem('nomeCliente') !== null){
+            if (localStorage.getItem('nomeCliente').length == 0 ){
+                faltaDados = faltaDados + 1 
+            }
+        }        
+
+        if (localStorage.getItem('whatsCliente') !== null){
+            if (localStorage.getItem('whatsCliente').length == 0){
+                faltaDados = faltaDados + 1 
+            }
+        }        
+
+        if (localStorage.getItem('ruaCliente') !== null){
+            if (localStorage.getItem('ruaCliente').length == 0){
+                faltaDados = faltaDados + 1 
+            }
+        }
+        
+        if (localStorage.getItem('numeroCliente') !== null){
+            if (localStorage.getItem('numeroCliente').length == 0){
+                faltaDados = faltaDados + 1 
+            }
+        }
+        
+        if (localStorage.getItem('cepCliente') !== null){
+            if (localStorage.getItem('cepCliente').length == 0){
+                faltaDados = faltaDados + 1 
+            }
         }
 
-        if (localStorage.getItem('whatsCliente').length == 0){
-            faltaDados = faltaDados + 1 
-        }
+        if (localStorage.getItem('formaPagamento') !== null){
+            if (localStorage.getItem('formaPagamento').length == 0){
+                faltaDados = faltaDados + 1 
+            }
+        }        
 
-        if (localStorage.getItem('ruaCliente').length == 0){
-            faltaDados = faltaDados + 1 
+        var produtos
+        if (localStorage.getItem('produtos') !== null){
+            produtos = JSON.parse(localStorage.getItem('produtos')) || [];
         }
-
-        if (localStorage.getItem('numeroCliente').length == 0){
-            faltaDados = faltaDados + 1 
-        }
-
-        if (localStorage.getItem('cepCliente').length == 0){
-            faltaDados = faltaDados + 1 
-        }
-
-        if (localStorage.getItem('formaPagamento').length == 0){
-            faltaDados = faltaDados + 1 
-        }
-
-        var produtos = JSON.parse(localStorage.getItem('produtos')) || [];
         if (produtos.length == 0){
             faltaDados = faltaDados + 1 
         }
@@ -734,7 +785,11 @@ $(function(){
     }
 
     function limparProdutosCarrinho(){
-        var produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+        var produtos
+
+        if (localStorage.getItem('produtos') !== null){
+            produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+        }
 
         // Remove todos os itens do array mantendo a referência
         produtos.splice(0, produtos.length);
@@ -772,19 +827,63 @@ $(function(){
     }
 
     function montarTextoEnviar() {
-        var valorTotalFormatado = localStorage.getItem('valorTotal').replace(".", ",")
+        var textoProdutoCarrinho = ""
+        if (localStorage.getItem('textoProdutosCarrinho') !== null){
+            textoProdutoCarrinho = localStorage.getItem('textoProdutosCarrinho')
+        }
+
+        var valorTotalFormatado
+        if (localStorage.getItem('valorTotal')){
+            valorTotalFormatado = localStorage.getItem('valorTotal').replace(".", ",")
+        }
+
+        var qtdTotalPecas =""
+        if (localStorage.getItem('qtdTotalPecas') !== null){
+            qtdTotalPecas = localStorage.getItem('qtdTotalPecas')
+        }
+
+        var formaPagamento = ""
+        if (localStorage.getItem('formaPagamento') !== null){
+            formaPagamento = localStorage.getItem('formaPagamento')
+        }
+
+        var nomeCliente = ""
+        if (localStorage.getItem('nomeCliente') !== null){
+            nomeCliente = localStorage.getItem('nomeCliente')
+        }
+
+        var whatsCliente = ""
+        if (localStorage.getItem('whatsCliente') !== null){
+            whatsCliente = localStorage.getItem('whatsCliente')
+        }
+
+        var ruaClinte = ""
+        if (localStorage.getItem('ruaCliente') !== null){
+            ruaClinte = localStorage.getItem('ruaCliente')
+        }
+
+        var numeroCliente = ""
+        if (localStorage.getItem('numeroCliente') !== null){
+            numeroCliente = localStorage.getItem('numeroCliente')
+        }
+
+        var cepCliente = ""
+        if (localStorage.getItem('cepCliente') !== null){
+            cepCliente = localStorage.getItem('cepCliente')
+        }
+
         var texto = ""
         texto = "*Meu Pedido* \n \n"
-        texto = texto + localStorage.getItem('textoProdutosCarrinho') + "\n"
+        texto = texto + textoProdutoCarrinho + "\n"
         texto = texto + "----------------\n"
-        texto = texto + "*Total de peças:* " + localStorage.getItem('qtdTotalPecas') + "\n"
+        texto = texto + "*Total de peças:* " + qtdTotalPecas + "\n"
         texto = texto + "*Valor Total:* R$ " + valorTotalFormatado + "\n"
-        texto = texto + "*Forma de Pagamento:* " + localStorage.getItem('formaPagamento') + "\n \n"
-        texto = texto + "*Nome:* " + localStorage.getItem('nomeCliente') + "\n"
-        texto = texto + "*Celular:* " + localStorage.getItem('whatsCliente') + "\n"
-        texto = texto + "*Endereço:* " + localStorage.getItem('ruaCliente')
-        texto = texto + ", *N°* " + localStorage.getItem('numeroCliente')
-        texto = texto + ", *CEP* " + localStorage.getItem('cepCliente') + "\n"
+        texto = texto + "*Forma de Pagamento:* " + formaPagamento + "\n \n"
+        texto = texto + "*Nome:* " + nomeCliente + "\n"
+        texto = texto + "*Celular:* " + whatsCliente + "\n"
+        texto = texto + "*Endereço:* " + ruaClinte
+        texto = texto + ", *N°* " + numeroCliente
+        texto = texto + ", *CEP* " + cepCliente + "\n"
         return texto
     }
 
@@ -797,22 +896,24 @@ $(function(){
     }
 
     function percorreProdutosCarrinhoExclui(idProdutoExcluir){
+        if (localStorage.getItem('produtos') !== null){
 
-        var produtos = JSON.parse(localStorage.getItem('produtos')) || [];
-        // Percorre o array de produtos
-        for (var i = 0; i < produtos.length; i++) {
-            // Acessa o nome do produto e imprime no console observacoes
+            var produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+            // Percorre o array de produtos
+            for (var i = 0; i < produtos.length; i++) {
 
-            if (produtos[i].id == idProdutoExcluir){
-                produtos.splice(i, 1);
-                // Saí do loop pois o item foi encontrado e removido
-                break;
+                if (produtos[i].id == idProdutoExcluir){
+                    produtos.splice(i, 1);
+                    // Saí do loop pois o item foi encontrado e removido
+                    break;
+                }
+
             }
 
-        }
-
-        // Atualiza o localStorage com o novo array de produtos
-        localStorage.setItem('produtos', JSON.stringify(produtos));
+            // Atualiza o localStorage com o novo array de produtos
+            localStorage.setItem('produtos', JSON.stringify(produtos));
+            atualizarIconeCarrinho()
+        }        
     }
 
 
