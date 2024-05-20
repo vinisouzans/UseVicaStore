@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html class="no-js" lang="pt">
+<html class="no-js" lang="en">
 <head>
-    <title>Carrinho - ViCa Store</title>
+    <title>Carrinho - Use ViCa Store</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -55,10 +55,10 @@
                 
             </div>
               
-            <div style="background-color: #FFCC04; margin-left: 1.5em; margin-right: 0.5em; border-radius: 5px; padding-left: 2em;">
-                <b style="color: white; font-size: 30px;">Endereço</b>
+            <div style="background-color: #d9d9d9; margin-left: 1.5em; margin-right: 0.5em; border-radius: 5px; padding-left: 2em;">
+                <b style="color: #df1e33 ; font-size: 30px;">Endereço</b>
                 <br>
-                <p style="text-decoration: none; font-size: 30px; margin-top: 20px; display: inline-block;">Selecione >></p>  
+                <p style="text-decoration: none; font-size: 30px; margin-top: 20px; display: inline-block; color: #df1e33 ;">Selecione >></p>  
                 <img ID="imgModalEndereco" src="img/botao-home.png" alt="cadastrar endereço" class="img-fluid" style="height: 60px; width: 60px;">     
                 <div>
                     <b ID="nome-rua" style="font-size: 27px;"></b>
@@ -67,10 +67,10 @@
                 </div>            
             </div>
 
-            <div style="background-color: #FFCC04; margin-top: 0.5em; margin-left: 1.5em; margin-right: 0.5em; border-radius: 5px; padding-left: 2em;">
-                <b style="color: white; font-size: 30px;">Forma de pagamento</b>
+            <div style="background-color: #d9d9d9; margin-top: 0.5em; margin-left: 1.5em; margin-right: 0.5em; border-radius: 5px; padding-left: 2em;">
+                <b style="color: #df1e33 ; font-size: 30px;">Forma de pagamento</b>
                 <br>
-                <p style="text-decoration: none; font-size: 30px; margin-top: 20px; display: inline-block;">Selecione >></p>  
+                <p style="text-decoration: none; font-size: 30px; margin-top: 20px; display: inline-block; color: #df1e33 ;">Selecione >></p>  
                 <img ID="imgModalPagamento" src="img/forma-de-pagamento.png" alt="Selecionar forma de pagamento" class="img-fluid" style="height: 60px; width: 60px;"> 
                 <div>
                     <b ID="pagamento" style="font-size: 27px;"></b>
@@ -80,11 +80,11 @@
             
             <div>
                 <div class="col span_12" style="padding-right: 0; padding-left: 0; margin-top: 15px; margin-left: 1.5em;">
-                    <p style="text-decoration: none; font-size: 27px; display: inline-block;">Valor Total:</p>  
-                    <b ID="valor-total" style="font-size: 27px; display: inline-block;"></b>  
+                    <p style="text-decoration: none; font-size: 35px; display: inline-block; color: #df1e33 ;">Valor Total:</p>  
+                    <b ID="valor-total" style="font-size: 35px; display: inline-block; color: #df1e33 ;"></b>  
                     <br>
-                    <p style="text-decoration: none; font-size: 27px; display: inline-block;">Quantidade de peças:</p>  
-                    <b ID="qtd-total-pecas" style="font-size: 27px; display: inline-block;"></b>                                                                               
+                    <p style="text-decoration: none; font-size: 35px; display: inline-block; color: #df1e33 ;">Quantidade de peças:</p>  
+                    <b ID="qtd-total-pecas" style="font-size: 35px; display: inline-block; color: #df1e33 ;"></b>                                                                               
                 </div>  
                 
             </div>
@@ -104,8 +104,8 @@
         
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom" style="background-color: #EFBF04; height: 150px;">
-        <div class="container" style="background-color: #EFBF04; height: 150px; max-width: 100%;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom" style="background-color: #df1e33; height: 150px;">
+        <div class="container" style="background-color: #df1e33; height: 150px; max-width: 100%;">
             <div class="row span_12 d-flex justify-content-center" style="margin-inline-start: 7em;">
                 <div class="col span_4" style="max-width: 33%;">
                     <!-- Ícone 1 -->
@@ -119,6 +119,7 @@
                     <a class="navbar-brand" href="#" style="font-size: 35px;">
                         <img src="img/shopping-cart.png" alt="Carrinho" height="60" class="d-inline-block align-top">
                         Carrinho
+                        <span class="cart-count" id="cartCount" hidden ><p ID="qtdCarrinhoIcone" style="font-size: 25px; margin-left: 7px;"></p></span>  
                     </a>
                 </div>
                 <div class="col span_4" style="max-width: 33%;">
@@ -135,7 +136,7 @@
     <!-- Modal Produto-->
     <div class="modal" id="myModal">
         <div class="modal-dialog">
-            <div class="modal-content bg-warning"> <!-- Adicione a classe bg-warning aqui -->
+            <div class="modal-content bg-warning" style="background-color: #df1e33; color: #df1e33;"> <!-- Adicione a classe bg-warning aqui -->
                           
                 <!-- Modal Body -->
                 <div class="modal-body container span_12">
@@ -189,42 +190,42 @@
 
     <!-- Modal Endereço -->
     <div class="modal" id="modalEndereco">
-        <div class="modal-dialog" style="max-width: 95%; max-height: 70%;">
-            <div class="modal-content bg-warning"> <!-- Adicione a classe bg-warning aqui -->
+        <div class="modal-dialog" style="max-width: 95%; max-height: 70%; background-color: #d9d9d9">
+            <div class="modal-content bg-warning" style="background-color: #df1e33; color: #df1e33;"> <!-- Adicione a classe bg-warning aqui -->
                           
                 <!-- Modal Body -->
                 <div class="modal-body container span_12">
-                    <button ID="btnFecharModalEndereco" type="button" class="close" data-dismiss="modal" style="color: white; font-size: 80px;">&times;</button>
-                    <h4 style="color: white; margin-left: 0.5em; color: white; font-size: 50px;">Qual o local de entrega?</h4>
+                    <button ID="btnFecharModalEndereco" type="button" class="close" data-dismiss="modal" style="color: #df1e33; font-size: 80px;">&times;</button>
+                    <h4 style="color: white; margin-left: 0.5em; color: #df1e33; font-size: 50px;">Qual o local de entrega?</h4>
                     
                     <div style="margin: 1em;">
                         <b style="font-size: 40px;">Qual seu nome?</b>
                     </div>
                     <div style="margin: 1em;">
-                        <input ID="inpt-nome" type="text" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
-                        <p ID="msg-nome" style="font-size: 30px; color: red; visibility: hidden;">Preencha seu Nome</p>
+                        <input ID="inpt-nome" type="text" style="width: 100%; border-color: #df1e33; border-radius: 5px; font-size: 40px;">
+                        <p ID="msg-nome" style="font-size: 30px; color: white; visibility: hidden;">Preencha seu Nome</p>
                     </div> 
 
                     <div style="margin: 1em;">
                         <b style="font-size: 40px;">Qual seu sobrenome?</b>
                     </div>
                     <div style="margin: 1em;">
-                        <input ID="inpt-sobrenome" type="text" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
+                        <input ID="inpt-sobrenome" type="text" style="width: 100%; border-color: #df1e33; border-radius: 5px; font-size: 40px;">
                     </div>       
 
                     <div style="margin: 1em;">
                         <b style="font-size: 40px;">Qual seu Whatsapp?</b>
                     </div>
                     <div style="margin: 1em;">
-                        <input type="text" id="telefoneInput" placeholder="(99) 99999-9999" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
-                        <p ID="msg-whats" style="font-size: 30px; color: red; visibility: hidden;">Preencha seu Whatsapp</p>
+                        <input type="text" id="telefoneInput" placeholder="(99) 99999-9999" style="width: 100%; border-color: #df1e33; border-radius: 5px; font-size: 40px;">
+                        <p ID="msg-whats" style="font-size: 30px; color: white; visibility: hidden;">Preencha seu Whatsapp</p>
                     </div>                     
                 
                     <div style="margin: 1em;">
                         <b style="font-size: 40px;">Rua / Avenida</b>
                     </div>
                     <div style="margin: 1em;">
-                        <input ID="inpt-rua" type="text" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
+                        <input ID="inpt-rua" type="text" style="width: 100%; border-color: #df1e33; border-radius: 5px; font-size: 40px;">
                         <p ID="msg-rua" style="font-size: 30px; color: red; visibility: hidden;">Preencha sua Rua</p>
                     </div> 
 
@@ -232,7 +233,7 @@
                         <b style="font-size: 40px;">Número</b>
                     </div>
                     <div style="margin: 1em;">
-                        <input ID="inpt-numero" type="number" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
+                        <input ID="inpt-numero" type="number" style="width: 100%; border-color: #df1e33; border-radius: 5px; font-size: 40px;">
                         <p ID="msg-numero" style="font-size: 30px; color: red; visibility: hidden;">Preencha o número</p>
                     </div> 
 
@@ -240,7 +241,7 @@
                         <b style="font-size: 40px;">CEP</b>
                     </div>
                     <div style="margin: 1em;">
-                        <input id="numero-cep" type="text" style="width: 100%; border-color: #FFCC04; border-radius: 5px; font-size: 40px;">
+                        <input id="numero-cep" type="text" style="width: 100%; border-color: #df1e33; border-radius: 5px; font-size: 40px;">
                     </div>                     
               
                 </div>
@@ -249,7 +250,7 @@
                 <div class="modal-footer d-flex justify-content-between">
                     <div ></div>
                     <div class="row justify-content-end"> <!-- Use justify-content-end para alinhar à direita -->
-                        <button ID="btnConfirmarModalEndereco" type="button" class="btn btn-dark" data-dismiss="modal" style="background-color: black; font-size: 50px;">
+                        <button ID="btnConfirmarModalEndereco" type="button" class="btn btn-dark" data-dismiss="modal" style="background-color: #df1e33; font-size: 50px;">
                             Confirmar
                         </button>
                     </div>               
@@ -261,12 +262,12 @@
     <!-- Modal Forma de Pagamento -->
     <div class="modal" id="modalFormaPagamento">
         <div class="modal-dialog" style="max-width: 90%; max-height: 90%;">
-            <div class="modal-content bg-warning"> <!-- Adicione a classe bg-warning aqui -->
+            <div class="modal-content bg-warning" style="color: #df1e33;"> <!-- Adicione a classe bg-warning aqui -->
                           
                 <!-- Modal Body -->
                 <div class="modal-body container span_12">
-                    <button ID="btnFecharModalPagamento" type="button" class="close" data-dismiss="modal" style="color: white; font-size: 80px;">&times;</button>
-                    <h4 style="color: white; color: white; font-size: 45px;">Qual a forma de pagamento?</h4>
+                    <button ID="btnFecharModalPagamento" type="button" class="close" data-dismiss="modal" style="color: #df1e33; font-size: 80px;">&times;</button>
+                    <h4 style="color: #df1e33; font-size: 45px;">Qual a forma de pagamento?</h4>
                 
                     <div style="margin: 1em;">
                         <form>
@@ -297,7 +298,7 @@
                 <div class="modal-footer d-flex justify-content-between">
                     <div ></div>
                     <div class="row justify-content-end"> <!-- Use justify-content-end para alinhar à direita -->
-                        <button ID="btnConfirmarFormaPagt" type="button" class="btn btn-dark" data-dismiss="modal" style="background-color: black; font-size: 50px;">
+                        <button ID="btnConfirmarFormaPagt" type="button" class="btn btn-dark" data-dismiss="modal" style="background-color: #df1e33; font-size: 50px;">
                             Confirmar
                         </button>
                     </div>               
