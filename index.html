@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <title>ViCa Store</title>
+    <title>Use ViCa Store - Produtos</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -14,7 +14,7 @@
     
     <div class="content">
         <!-- Seu conteúdo aqui -->
-        <h3 class="titulo-loja" alt="ViCa Store">ViCa Store</h3>
+        <h3 class="titulo-loja" alt="ViCa Store">Use ViCa Store</h3>
         <p class="tempo-entrega" alt="Roupas esportivas legging academia">Roupas fitness, ideal para diversas práticas esportivas.</p>
 
         <div id="successBalloon">Adicionado ao carrinho!</div>
@@ -319,9 +319,10 @@
                 </div>
                 <div class="col span_4 div-icone" >
                     <!-- Ícone 2  -->
-                    <a class="navbar-brand" href="carrinho.html">
+                    <a class="navbar-brand" href="carrinho.html">                        
                         <img src="img/shopping-cart.png" alt="Carrinho" height="60" class="d-inline-block align-top">
-                        Carrinho
+                        Carrinho     
+                        <span class="cart-count" id="cartCount" hidden ><p ID="qtdCarrinhoIcone" style="font-size: 25px; margin-left: 7px;"></p></span>                  
                     </a>
                 </div>
                 <div class="col span_4 div-icone" >
@@ -379,30 +380,29 @@
                     </div>
 
                     <div id="opcoesTamanho">
-                        <div class="tamanho" data-tamanho="P" >P</div>
-                        <div class="tamanho" data-tamanho="M" >M</div>
-                        <div class="tamanho" data-tamanho="G" >G</div>
-                        <div class="tamanho" data-tamanho="GG" >GG</div>
+                        <div class="tamanho" data-tamanho="P" style="color: #df1e33;">P</div>
+                        <div class="tamanho" data-tamanho="M" style="color: #df1e33;">M</div>
+                        <div class="tamanho" data-tamanho="G" style="color: #df1e33;">G</div>
+                        <div class="tamanho" data-tamanho="GG" style="color: #df1e33;">GG</div>
                     </div>
                     <p ID="msg-tamanho-selecionar" style="font-size: 30px; color: red; visibility: hidden;">Nenhum tamanho foi selecionado.</p>
                 
                     <div class="marg-1em">
-                        <b style="font-size: 30px;">Observação</b>
+                        <b style="font-size: 30px; color: #df1e33;">Observação</b>
                     </div>
                 
                     <div class="row marg-1em">
                         <div class="col">
-                            <textarea ID="obs-produto" class="form-control" style="font-size: 35px;"></textarea>
+                            <textarea ID="obs-produto" class="form-control" style="font-size: 30px;"></textarea>
                         </div>
                     </div>                
                 </div>
-                
-                
+                       
                 <!-- Modal Footer -->
-                <div class="modal-footer d-flex justify-content-between">         
+                <div class="modal-footer d-flex justify-content-between" style="background-color: #d9d9d9 ;">         
                     <div></div>                  
                     <div>
-                        <button ID="btn-adicionar" type="button" class="btn btn-dark" data-dismiss="modal" style="background-color: black; font-size: 40px;">
+                        <button ID="btn-adicionar" type="button" class="btn btn-dark" data-dismiss="modal" style="background-color: #df1e33; font-size: 40px;">
                             <img src="img/carrinho-branco.png" alt="Ícone de adicionar" style="width: 40px; height: 40px; margin-right: 5px;">Adicionar
                         </button>
                     </div>               
