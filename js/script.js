@@ -570,9 +570,56 @@ $(function(){
 
 
     //imgModalEndereco
-    $("#imgModalEndereco").click(function(){   
+    $("#imgModalEndereco").click(function(){  
+        verificaDadosEnderecoPreenche() 
         $("#modalEndereco").show()
     });
+
+    function verificaDadosEnderecoPreenche(){
+        if (localStorage.getItem('nomeCliente') !== null){
+            if (localStorage.getItem('nomeCliente').length !== 0){
+                var nomeCli = document.getElementById("inpt-nome")
+                nomeCli.value = localStorage.getItem('nomeCliente')
+            }
+        }
+
+        if (localStorage.getItem('sobrenomeCliente') !== null){
+            if (localStorage.getItem('sobrenomeCliente').length !== 0){
+                var sobreNomeCli = document.getElementById("inpt-sobrenome")
+                sobreNomeCli.value = localStorage.getItem('sobrenomeCliente')
+            }
+        }
+                
+        if (localStorage.getItem('whatsCliente') !== null){
+            if (localStorage.getItem('whatsCliente').length !== 0){
+                var wahtsCli = document.getElementById("telefoneInput")
+                wahtsCli.value = localStorage.getItem('whatsCliente')
+            }
+        }
+        
+        if (localStorage.getItem('ruaCliente') !== null){
+            if (localStorage.getItem('ruaCliente').length !== 0 ){
+                var ruaCli = document.getElementById("inpt-rua")
+                ruaCli.value = localStorage.getItem('ruaCliente')
+            }
+        }  
+
+        if (localStorage.getItem('numeroCliente') !== null){
+            if (localStorage.getItem('numeroCliente').length !== 0 ){
+                var numeroCli = document.getElementById("inpt-numero")
+                numeroCli.value = localStorage.getItem('numeroCliente')
+            }
+        }
+        
+        if (localStorage.getItem('cepCliente') !== null){
+            if (localStorage.getItem('cepCliente').length !== 0 ){
+                var cepCli = document.getElementById("numero-cep")
+                cepCli.value = localStorage.getItem('cepCliente')
+            }
+        }
+        
+        
+    }
 
     $("#imgModalPagamento").click(function(){   
         $("#modalFormaPagamento").show()
@@ -640,6 +687,7 @@ $(function(){
         var valorCep = cepInput.value;
         localStorage.setItem('cepCliente', valorCep);
         plotarDadosEntrega()
+        verificaHabilitarBtnWhats()
     }
 
     function plotarDadosEntrega(){
@@ -662,7 +710,7 @@ $(function(){
     function plotarDadosPagemento(){
         var formaPagamento = document.getElementById('pagamento');
         if (localStorage.getItem('formaPagamento') !== null){
-            formaPagamento.innerText = localStorage.getItem('formaPagamento')
+            formaPagamento.innerText = localStorage.getItem('formaPagamento')            
         }        
     }
 
@@ -716,72 +764,73 @@ $(function(){
         }
         
         if (faltaDados == 0){
-            plotarDadosPagemento()
+            plotarDadosPagemento()            
         }
+
+        verificaHabilitarBtnWhats()
         
     }
 
     function verificaHabilitarBtnWhats(){
 
         var faltaDados = 0
+        
+        if (localStorage.getItem('nomeCliente') == null){
+            faltaDados = faltaDados + 1 
+        }else if (localStorage.getItem('nomeCliente').length == 0 ){
+            faltaDados = faltaDados + 1 
+        }   
 
-        if (localStorage.getItem('nomeCliente') !== null){
-            if (localStorage.getItem('nomeCliente').length == 0 ){
-                faltaDados = faltaDados + 1 
-            }
-        }        
+        if (localStorage.getItem('whatsCliente') == null){
+            faltaDados = faltaDados + 1 
+        } else if (localStorage.getItem('whatsCliente').length == 0){
+            faltaDados = faltaDados + 1 
+        }    
 
-        if (localStorage.getItem('whatsCliente') !== null){
-            if (localStorage.getItem('whatsCliente').length == 0){
-                faltaDados = faltaDados + 1 
-            }
-        }        
-
-        if (localStorage.getItem('ruaCliente') !== null){
-            if (localStorage.getItem('ruaCliente').length == 0){
-                faltaDados = faltaDados + 1 
-            }
+        if (localStorage.getItem('ruaCliente') == null){
+            faltaDados = faltaDados + 1 
+        } else if (localStorage.getItem('ruaCliente').length == 0){
+            faltaDados = faltaDados + 1 
         }
         
-        if (localStorage.getItem('numeroCliente') !== null){
-            if (localStorage.getItem('numeroCliente').length == 0){
-                faltaDados = faltaDados + 1 
-            }
+        if (localStorage.getItem('numeroCliente') == null){
+            faltaDados = faltaDados + 1 
+        } else if (localStorage.getItem('numeroCliente').length == 0){
+            faltaDados = faltaDados + 1 
         }
         
-        if (localStorage.getItem('cepCliente') !== null){
-            if (localStorage.getItem('cepCliente').length == 0){
-                faltaDados = faltaDados + 1 
-            }
+        if (localStorage.getItem('cepCliente') == null){
+            faltaDados = faltaDados + 1 
+        } else if (localStorage.getItem('cepCliente').length == 0){
+            faltaDados = faltaDados + 1 
         }
 
-        if (localStorage.getItem('formaPagamento') !== null){
-            if (localStorage.getItem('formaPagamento').length == 0){
-                faltaDados = faltaDados + 1 
-            }
-        }        
+        if (localStorage.getItem('formaPagamento') == null){
+            faltaDados = faltaDados + 1 
+        } else if (localStorage.getItem('formaPagamento').length == 0){
+            faltaDados = faltaDados + 1 
+        }     
 
-        var produtos
+        var produtos = []
         if (localStorage.getItem('produtos') !== null){
             produtos = JSON.parse(localStorage.getItem('produtos')) || [];
         }
         if (produtos.length == 0){
             faltaDados = faltaDados + 1 
         }
-
+        
         if (faltaDados == 0){
             var botao = document.getElementById('btn-whats');
             // Remove o atributo 'disabled'
             botao.removeAttribute('disabled');
-            document.getElementById('link-whatsapp').style.pointerEvents = 'auto';
-
+            document.getElementById('link-whatsapp').style.pointerEvents = 'auto';            
         } else {
             var botao = document.getElementById('btn-whats');
             // Adiciona o atributo 'disabled'
             botao.setAttribute('disabled', 'disabled');
             document.getElementById('link-whatsapp').style.pointerEvents = 'none';
         }        
-
+        
     }
 
     function limparProdutosCarrinho(){
@@ -804,7 +853,8 @@ $(function(){
     //btnConfirmarFormaPagt
 
     $("#btnConfirmarFormaPagt").click(function(){   
-        obterOpcaoSelecionada() 
+        obterOpcaoSelecionada()
+        verificaHabilitarBtnWhats()
     });
     // Função para percorrer os elementos de entrada e obter o valor selecionado
     function obterOpcaoSelecionada() {
