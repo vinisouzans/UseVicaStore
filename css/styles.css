@@ -104,6 +104,12 @@ body, html {
     margin-bottom: 1em;  
     font-size: 30px;     
 }
+
+.icone-insta {
+    text-align: center;
+    height: 60px;
+    align-items: center;
+}
 .titulo-categoria {
     color: black;
     text-align: center;
